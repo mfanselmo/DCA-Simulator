@@ -2,6 +2,8 @@
 
 Martin Anselmo
 
+Live @ https://dca-simulator-ten.vercel.app/
+
 ## Technologies
 - React 19
 - Vite
@@ -20,7 +22,7 @@ Martin Anselmo
 Use some CORS tool so the app is able to correctly connect with Buda's API
 
 ## Production
-- Hosted in vercel
+- Hosted in vercel: https://dca-simulator-ten.vercel.app/
 - Possible to host with any docker compatible service
   - `docker build -t my-vite-react-app .`
   - `docker run -p 3000:80 my-vite-react-app`
