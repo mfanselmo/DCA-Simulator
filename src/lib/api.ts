@@ -1,7 +1,7 @@
 const getBaseUrl = (marketId: string) =>
   process.env.NODE_ENV === "development"
     ? `http://localhost:8010/proxy/api/v2/markets/${marketId}/trades`
-    : `https://www.buda.com/api/v2/markets/${marketId}/trades`; // User will have to set up CORS in production
+    : `https://api.cors.lol/?url=https://www.buda.com/api/v2/markets/${marketId}/trades`; // Temporary fix for CORS issue in production
 
 type TradeResponse = {
   trades: {

@@ -26,6 +26,7 @@ Use some CORS tool so the app is able to correctly connect with Buda's API
 - Possible to host with any docker compatible service
   - `docker build -t my-vite-react-app .`
   - `docker run -p 3000:80 my-vite-react-app`
+- CORS issue is solved in a temporary way with https://cors.lol/#getStarted (should be fine for testing purposes, if requests get rate limited contact me)
   
 
 
