@@ -3,6 +3,7 @@ import { Input } from "./ui/input";
 import { UserContext } from "@/lib/context";
 import { Label } from "./ui/label";
 import { DatePicker } from "./ui/datePicker";
+import { Switch } from "./ui/switch";
 
 const InputParams: React.FC = () => {
   const {
@@ -12,6 +13,8 @@ const InputParams: React.FC = () => {
     setEndDate,
     endDate,
     setStartDate,
+    fixCors,
+    setFixCors,
   } = useContext(UserContext);
 
   return (
@@ -19,7 +22,7 @@ const InputParams: React.FC = () => {
       <div>
         <Label htmlFor="amount">Amount to invest each month (CLP)</Label>
         <Input
-          name="amount"
+          id="amount"
           type="number"
           placeholder="Amount to invest"
           value={amountToInvest}
@@ -33,6 +36,10 @@ const InputParams: React.FC = () => {
       <div>
         <Label>End date</Label>
         <DatePicker date={endDate} setDate={setEndDate} />
+      </div>
+      <div>
+        <Label htmlFor="fix-cors">Fix CORS</Label>
+        <Switch id="fix-cors" checked={fixCors} onCheckedChange={setFixCors} />
       </div>
     </div>
   );

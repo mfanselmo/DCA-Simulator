@@ -51,6 +51,8 @@ const AppWithContext = () => {
     new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
   );
   const [endDate, setEndDate] = useState(new Date());
+  const [fixCors, setFixCors] = useState(false);
+
   return (
     <UserContext.Provider
       value={{
@@ -62,6 +64,8 @@ const AppWithContext = () => {
         setStartDate,
         endDate,
         setEndDate,
+        fixCors,
+        setFixCors,
       }}
     >
       <App />

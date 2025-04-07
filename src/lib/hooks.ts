@@ -17,7 +17,7 @@ export type MonthPortfolio = {
 };
 
 export function useMonthlyPrices(marketId: string) {
-  const { startDate, endDate } = useContext(UserContext);
+  const { startDate, endDate, fixCors } = useContext(UserContext);
 
   const start = dayjs.utc(startDate).startOf("month").hour(12);
   const end = dayjs.utc(endDate).startOf("month").hour(12);
@@ -31,8 +31,8 @@ export function useMonthlyPrices(marketId: string) {
 
   const queries = useQueries({
     queries: timestamps.map((timestamp) => ({
-      queryKey: ["price-at", marketId, timestamp],
-      queryFn: () => fetchLatestPrice(timestamp, marketId),
+      queryKey: ["price-at", marketId, timestamp, fixCors],
+      queryFn: () => fetchLatestPrice(timestamp, marketId, fixCors),
     })),
   });
 

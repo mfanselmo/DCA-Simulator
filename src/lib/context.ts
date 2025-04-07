@@ -9,6 +9,8 @@ type UserContext = {
   setStartDate: (date: Date) => void;
   endDate: Date;
   setEndDate: (date: Date) => void;
+  fixCors: boolean;
+  setFixCors: (fix: boolean) => void;
 };
 
 export const UserContext = createContext<UserContext>({
@@ -20,4 +22,6 @@ export const UserContext = createContext<UserContext>({
   setStartDate: () => {},
   endDate: new Date(),
   setEndDate: () => {},
+  fixCors: false,
+  setFixCors: () => {},
 });

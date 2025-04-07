@@ -1,7 +1,8 @@
-const getBaseUrl = (marketId: string) =>
+const getBaseUrl = (marketId: string, fixCors = false) =>
   process.env.NODE_ENV === "development"
     ? `http://localhost:8010/proxy/api/v2/markets/${marketId}/trades`
-    : `https://api.cors.lol/?url=https://www.buda.com/api/v2/markets/${marketId}/trades`; // Temporary fix for CORS issue in production
+    : (fixCors ? "https://api.cors.lol/?url=" : "") +
+      `https://www.buda.com/api/v2/markets/${marketId}/trades`; // Temporary fix for CORS issue in production
 
 type TradeResponse = {
   trades: {
@@ -16,9 +17,10 @@ type TradeResponse = {
 export const fetchLatestPrice = async (
   timestamp: number,
   marketId = "btc-clp",
+  fixCors = false,
 ) => {
   const result = await fetch(
-    `${getBaseUrl(marketId)}?timestamp=${timestamp}&limit=1`,
+    `${getBaseUrl(marketId, fixCors)}?timestamp=${timestamp}&limit=1`,
     {
       method: "GET",
       headers: {
