@@ -15,6 +15,8 @@ const InputParams: React.FC = () => {
     setStartDate,
     fixCors,
     setFixCors,
+    marketId,
+    setMarketId,
   } = useContext(UserContext);
 
   return (
@@ -28,6 +30,18 @@ const InputParams: React.FC = () => {
           value={amountToInvest}
           onChange={(e) => setAmountToInvest(parseFloat(e.target.value))}
         />
+      </div>
+      <div>
+        <Label htmlFor="market">Market</Label>
+        <select
+          id="market"
+          value={marketId}
+          onChange={(e) => setMarketId(e.target.value)}
+          className="block w-full border rounded px-2 py-1 bg-background text-foreground"
+        >
+          <option value="btc-clp">BTC-CLP</option>
+          <option value="eth-clp">ETH-CLP</option>
+        </select>
       </div>
       <div>
         <Label>Start date</Label>
