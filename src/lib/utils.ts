@@ -12,11 +12,11 @@ export function formatTimestamp(timestamp: number) {
   return date.format("YYYY-MM-DD");
 }
 
-export function formatPrice(price?: number) {
+export function formatPrice(price?: number, currency: string = "CLP") {
   if (price === undefined) return "";
-  return new Intl.NumberFormat("es-CL", {
+  return new Intl.NumberFormat(currency === "CLP" ? "es-CL" : undefined, {
     style: "currency",
-    currency: "CLP",
+    currency,
   }).format(price);
 }
 

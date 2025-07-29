@@ -11,6 +11,8 @@ import {
 import React from "react";
 import { MonthPortfolio } from "@/lib/hooks";
 import { formatPrice, formatTimestamp } from "@/lib/utils";
+import { useContext } from "react";
+import { UserContext } from "@/lib/context";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 const chartConfig = {
@@ -33,6 +35,8 @@ type Props = {
 };
 
 const ResultsChart: React.FC<Props> = ({ monthPortfolios }) => {
+  const { marketId } = useContext(UserContext);
+  const currency = marketId.split('-')[1].toUpperCase();
   return (
     <Card className="grow">
       <CardHeader>
@@ -43,14 +47,14 @@ const ResultsChart: React.FC<Props> = ({ monthPortfolios }) => {
           <LineChart accessibilityLayer data={monthPortfolios}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="timestamp" tickFormatter={formatTimestamp} />
-            <YAxis tickFormatter={formatPrice} />
+            <YAxis tickFormatter={v => formatPrice(v, currency)} />
 
             <ChartTooltip
               content={
                 <ChartTooltipContent
                   labelFormatter={formatTimestamp}
                   formatter={(value, name) =>
-                    `${chartConfig[name as keyof typeof chartConfig].label}: ${formatPrice(value as number)}`
+                    `${chartConfig[name as keyof typeof chartConfig].label}: ${formatPrice(value as number, currency)}`
                   }
                 />
               }

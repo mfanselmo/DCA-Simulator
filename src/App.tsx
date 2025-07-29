@@ -8,8 +8,11 @@ import ResultsChart from "./components/ResultsChart";
 import { Alert, AlertDescription, AlertTitle } from "./components/ui/alert";
 import { AlertCircle } from "lucide-react";
 
+import { useContext } from "react";
+
 function App() {
-  const { prices, isError } = useMonthlyPrices("btc-clp");
+  const { marketId } = useContext(UserContext);
+  const { prices, isError } = useMonthlyPrices(marketId);
   const monthPortfolios = usePortfolioValue(prices);
 
   return (

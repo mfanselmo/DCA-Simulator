@@ -11,10 +11,14 @@ import React from "react";
 import { formatPercentage, formatPrice, formatTimestamp } from "@/lib/utils";
 import { MonthPortfolio } from "@/lib/hooks";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { useContext } from "react";
+import { UserContext } from "@/lib/context";
 type Props = {
   monthPortfolios: MonthPortfolio[];
 };
 const ResultsTable: React.FC<Props> = ({ monthPortfolios }) => {
+  const { marketId } = useContext(UserContext);
+  const currency = marketId.split('-')[1].toUpperCase();
   return (
     <Card className="grow">
       <CardHeader>
@@ -47,15 +51,15 @@ const ResultsTable: React.FC<Props> = ({ monthPortfolios }) => {
               return (
                 <TableRow key={month.timestamp}>
                   <TableCell>{formatTimestamp(month.timestamp)}</TableCell>
-                  <TableCell>{formatPrice(month.price)}</TableCell>
-                  <TableCell>{formatPrice(month.investedAmount)}</TableCell>
-                  <TableCell>{formatPrice(month.portfolioValue)}</TableCell>
+                  <TableCell>{formatPrice(month.price, currency)}</TableCell>
+                  <TableCell>{formatPrice(month.investedAmount, currency)}</TableCell>
+                  <TableCell>{formatPrice(month.portfolioValue, currency)}</TableCell>
                   <TableCell
                     className={
                       positiveChange ? "text-green-500" : "text-red-500"
                     }
                   >
-                    {formatPrice(month.change)}
+                    {formatPrice(month.change, currency)}
                   </TableCell>
                   <TableCell
                     className={
