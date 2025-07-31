@@ -13,6 +13,11 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  server: {
+    host: true,
+    allowedHosts: true,
+    cors: true,
+  },
   test: {
     globals: true, // Allows using describe, it, expect etc. globally
     environment: "jsdom", // Simulate browser environment

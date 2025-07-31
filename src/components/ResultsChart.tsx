@@ -8,10 +8,11 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import React from "react";
+import React, { useContext } from "react";
 import { MonthPortfolio } from "@/lib/hooks";
 import { formatPrice, formatTimestamp } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { UserContext } from "@/lib/context";
 
 const chartConfig = {
   portfolioValue: {
@@ -33,10 +34,15 @@ type Props = {
 };
 
 const ResultsChart: React.FC<Props> = ({ monthPortfolios }) => {
+  const { marketId } = useContext(UserContext);
+  
+  // Determine the cryptocurrency name based on the market ID
+  const cryptoName = marketId.startsWith("btc") ? "Bitcoin" : "Ethereum";
+  
   return (
     <Card className="grow">
       <CardHeader>
-        <CardTitle>Investment over time</CardTitle>
+        <CardTitle>{cryptoName} Investment over time</CardTitle>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig} className="min-h-[200px] w-full">

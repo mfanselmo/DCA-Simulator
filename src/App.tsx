@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import InputParams from "./components/InputParams";
 import { UserContext } from "./lib/context";
 import { useMonthlyPrices, usePortfolioValue } from "./lib/hooks";
@@ -9,7 +9,8 @@ import { Alert, AlertDescription, AlertTitle } from "./components/ui/alert";
 import { AlertCircle } from "lucide-react";
 
 function App() {
-  const { prices, isError } = useMonthlyPrices("btc-clp");
+  const { marketId } = useContext(UserContext);
+  const { prices, isError } = useMonthlyPrices(marketId);
   const monthPortfolios = usePortfolioValue(prices);
 
   return (
