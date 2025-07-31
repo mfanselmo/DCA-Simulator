@@ -4,11 +4,14 @@ import { UserContext } from "@/lib/context";
 import { Label } from "./ui/label";
 import { DatePicker } from "./ui/datePicker";
 import { Switch } from "./ui/switch";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 
 const InputParams: React.FC = () => {
   const {
     amountToInvest,
     setAmountToInvest,
+    marketId,
+    setMarketId,
     startDate,
     setEndDate,
     endDate,
@@ -18,7 +21,19 @@ const InputParams: React.FC = () => {
   } = useContext(UserContext);
 
   return (
-    <div className="flex  flex-col md:flex-row gap-4">
+    <div className="flex flex-col md:flex-row gap-4">
+      <div>
+        <Label htmlFor="market">Market</Label>
+        <Select value={marketId} onValueChange={setMarketId}>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Select market" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="btc-clp">BTC/CLP</SelectItem>
+            <SelectItem value="eth-clp">ETH/CLP</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
       <div>
         <Label htmlFor="amount">Amount to invest each month (CLP)</Label>
         <Input

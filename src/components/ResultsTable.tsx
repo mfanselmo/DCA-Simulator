@@ -7,14 +7,22 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import React from "react";
+import React, { useContext } from "react";
 import { formatPercentage, formatPrice, formatTimestamp } from "@/lib/utils";
 import { MonthPortfolio } from "@/lib/hooks";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { UserContext } from "@/lib/context";
+
 type Props = {
   monthPortfolios: MonthPortfolio[];
 };
+
 const ResultsTable: React.FC<Props> = ({ monthPortfolios }) => {
+  const { marketId } = useContext(UserContext);
+  
+  // Determine the cryptocurrency name based on the market ID
+  const cryptoName = marketId.startsWith("btc") ? "Bitcoin" : "Ethereum";
+  
   return (
     <Card className="grow">
       <CardHeader>
@@ -25,7 +33,7 @@ const ResultsTable: React.FC<Props> = ({ monthPortfolios }) => {
           <TableHeader>
             <TableRow>
               <TableHead>Date</TableHead>
-              <TableHead>Bitcoin Price</TableHead>
+              <TableHead>{cryptoName} Price</TableHead>
               <TableHead>Total Invested Amount</TableHead>
               <TableHead>Total portfolio worth</TableHead>
               <TableHead>Change</TableHead>

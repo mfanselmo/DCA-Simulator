@@ -13,7 +13,7 @@ export type MonthPortfolio = {
   investedAmount: number;
   change: number;
   changePercentage: number;
-  bitcoinAmount: number;
+  cryptoAmount: number;
 };
 
 export function useMonthlyPrices(marketId: string) {
@@ -64,7 +64,7 @@ export function usePortfolioValue(
         ...price,
         portfolioValue: 0,
         change: 0,
-        bitcoinAmount: 0,
+        cryptoAmount: 0,
         investedAmount: 0,
         changePercentage: 0,
       });
@@ -72,14 +72,14 @@ export function usePortfolioValue(
     }
 
     if (index === 0) {
-      const bitcoinAmount = amountToInvest / price.price;
-      const portfolioValue = bitcoinAmount * price.price;
+      const cryptoAmount = amountToInvest / price.price;
+      const portfolioValue = cryptoAmount * price.price;
       monthPortfolios.push({
         ...price,
         portfolioValue,
         change: 0,
         changePercentage: 0,
-        bitcoinAmount,
+        cryptoAmount,
         investedAmount: amountToInvest,
       });
       return;
@@ -87,16 +87,16 @@ export function usePortfolioValue(
 
     const prevMonthData = monthPortfolios[index - 1];
     const investedAmount = amountToInvest * (index + 1);
-    const bitcoinAmount =
-      prevMonthData.bitcoinAmount + amountToInvest / price.price;
-    const portfolioValue = bitcoinAmount * price.price;
+    const cryptoAmount =
+      prevMonthData.cryptoAmount + amountToInvest / price.price;
+    const portfolioValue = cryptoAmount * price.price;
     const change = portfolioValue - investedAmount;
     monthPortfolios.push({
       ...price,
       portfolioValue,
       change,
       investedAmount,
-      bitcoinAmount,
+      cryptoAmount,
       changePercentage: 100 * (portfolioValue / investedAmount - 1),
     });
   });
